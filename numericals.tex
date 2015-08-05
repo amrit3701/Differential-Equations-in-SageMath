@@ -1,0 +1,79 @@
+\section{Numericals}
+
+\begin{example}
+A spring at rest is suspened from the ceiling wthout mass. A 2 kg weight is then attached to this spring, stretching it 9.8 cm. From a position 2/3 m above equilibrium the weigth is give a downward velocity of 5 m/s.
+Find the equation of motion.
+What is the amplitude?
+At what times the mass first equilibrium?
+\end{example}
+
+
+\begin{sagesilent}
+m=2
+g=9.8
+x=.098
+
+# Calcuating spring constant
+k=m*g/x
+\end{sagesilent}
+\solution{}
+Note $m = 2 kg$, $x =9.8 cm$, and $k = mg/x$ = $\sage{k.n(digits=4)}$.
+\begin{sagesilent}
+var('t')
+x=function('x',t)
+var('m')
+var('k')
+k=200
+m=2
+de =diff(x,t,2)+k*x/m
+
+# Solving our differential equation
+z = desolve(de,dvar= x,ivar=t)
+\end{sagesilent}
+Therefore, the general solution $x = \sage{z}$. Then by computing the above equation from the initial conditions $x(0) = -2/3$ (down is positive, up is negative), $x'(0) = 5$ we get,
+
+\begin{sagesilent}
+var('t')
+x=function('x',t)
+var('m')
+var('k')
+assume(k>0)
+assume(m>0)
+de =diff(x,t,2)+k*x/m
+z = desolve(de,dvar= x,ivar=t)
+
+m=2
+k=200
+de = diff(x,t,2)+k*x/m
+# Solving our differential equation by putting the values of mass and spring constant and setting up initial conditions
+z = desolve(de,dvar=x,ivar=t,ics=[0,-2/3,5])
+pl = plot(z,(t,0,2),figsize=(4,2.5),fontsize = 7,axes_labels=['$t$','$x$'],color=('red')) 
+\end{sagesilent}
+
+$$x = \sage{z}$$\\
+Now we write this in the more compact and useful form 
+\begin{sagesilent}
+o=var('omega')
+p=var('phi')
+var('t')
+var('A,K1,K2')
+e=A*sin(o*t+p)
+f=K2*cos(o*t)+K1*sin(o*t)
+a=sqrt((K1)^2+(K2)^2)
+\end{sagesilent}
+$$x = \sage{e} = \sage{f}$$\\
+where $A = \sage{a}$ denotes the $amplitude$
+\begin{sagesilent}
+k1=-2/3
+k2=1/2
+a = sqrt(k1^2+k2^2)
+\end{sagesilent}
+$$A = \sage{a}$$
+% ADDING CAPTION TO GRAPH
+\begin{figure}[h]
+% PLOTTING OUR GRAPH
+$$\sageplot{pl}$$
+\caption{Graph}
+
+\end{figure}
+

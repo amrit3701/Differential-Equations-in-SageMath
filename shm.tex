@@ -1,82 +1,13 @@
-\documentclass{article}
-\title{Solving Differential Equations representing Simple Harmonic Motion}
-\author{Amritpal Singh}
-\usepackage{sagetex}
+
+\documentclass{report}
+
+	\input{usepackage.tex}
 
 \begin{document}
-\maketitle
+	\input{title.tex}
 
-\begin{sagesilent}
-k=var('k')
-m=var('m')
-t=var('t')
-x=function('x',t)
+	\input{chapter.tex}
 
-assume(k>0)
-assume(m>0)
-
-de = diff(x,t,2)+(k*x)/m
-z=desolve(de,dvar=x,ivar=t)
-\end{sagesilent}
-Consider $m$ be the mass of object, $k$ be spring constant, $x$ be a displacement from equilibrium state of a spring and $t$ is time. 
-\\Therefore, the given differential equation of Simple Harmonic Motion is  
-
-\begin{comment}
-\begin{sagesilent}
-F=var('F') 
-a=var('a')
-\end{sagesilent}
-
-\[
- \sage{F==m*a} --1 \\ 
- \sage{F==-k*x} --2
-\]
-\end{comment}
-
-\[
-  \frac{\mathrm{d}^{2}}{\mathrm{d}t^{2}}x +  \sage{k*x/m} = 0.
-\]
-
-
-Solving the above differential equation, we get,
-
-$$x = \sage{z}$$
-
-
-
-%\sage{assume(k>0)}
-
-
-%\begin{sagecommandline}
-%  sage: z=desolve(de,dvar=x,ivar=t)
-%  sage: print z
-%\(sqrt(k)*t/sqrt(m)) + _K1*sin(sqrt(k)*t/sqrt(m))
-
-%d{sagecommandline}
-
-%$\frac{k x\left(t\right)}{m} + D[0, 0]\left(x\right)\left(t\right)$
-
-%$$\sage{de}$$
-
-%$\sage{z}$
-
-%$$\sage{diff(x,t,2)+(k*x)/m}$$
-
-
-\begin{sagesilent}
-m=1
-k=1
-t=var('t')
-de = diff(x,t,2)+k*x/m
-z2 = desolve(de,dvar=x,ivar=t,ics=[0,1,0])
-plot=plot(z2,(t,0,10),color=('red'), figsize = (4,2.5),thickness = 1)
-print z2
-\end{sagesilent}
-
-
-When $m=1$, $k=1$, then the graph is
-
-$$\sageplot{plot}$$
-
+	\input{numericals.tex}
 
 \end{document}
